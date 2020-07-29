@@ -7,8 +7,43 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-
+    <header>
+      <div class="playerLabel" id="left">Player 1</div>
+      <h1>Tic-Tac-Toe</h1>
+      <div class="playerLabel" id="right">Player 2</div>
+    </header>
     
+    <div id="board">
+      <div class="cell" id="1"></div>
+      <div class="cell" id="2"></div>
+      <div class="cell" id="3"></div>
+      <div class="cell" id="4"></div>
+      <div class="cell" id="5"></div>
+      <div class="cell" id="6"></div>
+      <div class="cell" id="7"></div>
+      <div class="cell" id="8"></div>
+      <div class="cell" id="9"></div>
+    </div>
+        <!-- FORM FOR SETTING PLAYER NAMES AT GAME START -->
+        <div id="myModal" class="modal">
+          <form class="modal-content">
+            <div class="modal-header">
+              <p>Set Player Names</p>
+            </div>
+            <div class="fields">
+              <div class="field-group">
+                <label for="p1-name">Player 1 - X</label>
+                <input class="field-ctrl" type="text" name="p1-name" required="" autofocus>
+              </div>
+              <div class="field-group">
+                <label for="p2-name">Player 2 - O</label>
+                <input class="field-ctrl" type="text" name="p2-name" required="">
+              </div>
+            </div>
+            <button type="submit" class="formSubmit" name="Submit">Start Game</button>
+          </form>
+        </div>
+        <!------------------------------------------------->
     <script src="script.js" async defer></script>
   </body>
 </html>
