@@ -8,11 +8,21 @@
   </head>
   <body>
     <header>
-      <div class="playerLabel" id="left">Player 1</div>
+      <div class="playerLabel" id="left">
+        <div id="leftLabel">Player 1</div>
+        <div class="name" id="leftName"></div>
+      </div>
+      <div class="turnIndicator" id="leftDot">&bull;</div>
       <h1>Tic-Tac-Toe</h1>
-      <div class="playerLabel" id="right">Player 2</div>
+      <div class="turnIndicator" id="rightDot">&bull;</div>
+      <div class="playerLabel" id="right">
+        <div id="rightLabel">Player 2</div>
+        <div class="name" id="rightName"></div>
+      </div>
     </header>
-    
+    <center>
+    <button type="button" id="reset">Reset</button>
+    </center>
     <div id="board">
       <div class="cell" id="1"></div>
       <div class="cell" id="2"></div>
