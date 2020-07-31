@@ -26,8 +26,8 @@ const gameBoard = (() => {
 
     let win;
     winCombos.forEach((combo) => {
-      let mappedCombo = combo.map((index) => board[index]);
-      if (mappedCombo.every((cell) => cell == marker)) {
+      let mappedCombo = combo.map((index) => board[index]); // map combo indices to board markers at those indices
+      if (mappedCombo.every((cell) => cell == marker)) { // check  if all markers match
         win = combo;
       };
     });
@@ -35,7 +35,7 @@ const gameBoard = (() => {
   };
 
   const checkTie = () => {
-    return board.every((cell) => cell == 'x' || cell == 'o');
+    return board.every((cell) => cell == 'x' || cell == 'o'); // all cells full?
   };
 
   return {getBoard, getBoardCell, updateBoard, clearBoard, checkWin, checkTie};
@@ -44,7 +44,6 @@ const gameBoard = (() => {
 // game module
 const game = (() => {
 
-  let gameBoardDiv = document.getElementById('board');
   let cells = Array.from(document.querySelectorAll('.cell'));
   let modal = document.getElementById('myModal');
   let form = document.querySelector('.modal-content');
@@ -59,27 +58,22 @@ const game = (() => {
   let player2 = player("", 'o');
 
   const render = () => {
-    //gameBoard.clearBoard();
-    console.log('start render');
     cells.forEach(cell => {
       cell.innerHTML = gameBoard.getBoardCell(cell.id - 1);
-      console.log(`rendered cell ${cell.id} with marker ${gameBoard.getBoardCell(cell.id - 1)}`);
     });
   };
 
-  const getCurrentPlayer = () => {
+  const getCurrentPlayer = () => { // based on turn count
     return (turnCounter % 2 == 0)? player2 : player1;
   };
 
   const checkGame = (player) => {
-    let winCombo = gameBoard.checkWin(player.marker);
-    if (winCombo != false) {
-      // player win alert
+    let winCombo = gameBoard.checkWin(player.marker); // returns winning pattern
+    if (winCombo != false) { // if a pattern is returned
       alert(`${getCurrentPlayer().name} wins!`);
       return true;
     }
     else if (gameBoard.checkTie()) {
-      // tie alert
       alert(`It's a tie!`);
       return true;
     }
@@ -89,11 +83,9 @@ const game = (() => {
   };
 
   const makeMove = (event) => {
-    console.log(`begin makeMove with target ${event.target.getAttribute('class')} ${event.target.id}`);
-    console.log(`turnCounter before move is ${turnCounter}`);
     let currentPlayer = getCurrentPlayer();
-    if (event.target.innerHTML === " ") {
-      if (currentPlayer === player1) {
+    if (event.target.innerHTML === " ") { // must select empty cell
+      if (currentPlayer === player1) {       // handles turn indicator
         leftDot.style.color = "transparent";
         rightDot.style.color = "rgb(19, 230, 0)";
       }
@@ -101,9 +93,9 @@ const game = (() => {
         rightDot.style.color = "transparent";
         leftDot.style.color = "rgb(19, 230, 0)";
       }
-      gameBoard.updateBoard(event.target.id - 1, currentPlayer.marker);
+      gameBoard.updateBoard(event.target.id - 1, currentPlayer.marker); // make the move
       render();
-      if (checkGame(currentPlayer)) {
+      if (checkGame(currentPlayer)) { // if win or tie
         newGame();
       }
       else {
@@ -125,6 +117,7 @@ const game = (() => {
 
   resetBtn.addEventListener('click', newGame);
 
+  // for intro modal -- setting names
   form.addEventListener('submit', function(event) {
     event.preventDefault();
     player1 = player(this.elements['p1-name'].value, 'x');
